@@ -21,7 +21,6 @@
         android:layout_alignParentBottom="true"
         android:elevation="3dp">
 
-
         <com.lorentzos.flingswipe.SwipeFlingAdapterView
             android:id="@+id/flinger"
             android:layout_width="match_parent"
@@ -29,6 +28,12 @@
             android:background="#ffffff"
             app:rotation_degrees="15.5"
             tools:context=".MainActivity"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#ededed"
+            android:layout_gravity="top"/>
 
         <FrameLayout
             android:id="@+id/back_button"
@@ -60,11 +65,6 @@
 
         </FrameLayout>
 
-
-
-
-
     </FrameLayout>
-
 
 </RelativeLayout>
