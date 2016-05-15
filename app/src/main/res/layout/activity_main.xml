@@ -14,20 +14,57 @@
         android:textSize="28sp"
         android:focusable="false"/>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="@dimen/activity_horizontal_margin"
-        android:layout_height="0dp"
-        android:layout_centerVertical="true"
-        />
-
-    <com.lorentzos.flingswipe.SwipeFlingAdapterView
-        android:id="@+id/frame"
+    <FrameLayout
+        android:id="@+id/fling_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffeee9e2"
-        app:rotation_degrees="15.5"
-        android:layout_below="@id/divider"
-        tools:context=".MainActivity"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:elevation="3dp">
+
+
+        <com.lorentzos.flingswipe.SwipeFlingAdapterView
+            android:id="@+id/flinger"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="#ffffff"
+            app:rotation_degrees="15.5"
+            tools:context=".MainActivity"/>
+
+        <FrameLayout
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:background="@drawable/circular_button_bkg"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/space_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:background="@drawable/circular_button_bkg"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/forward"/>
+
+        </FrameLayout>
+
+
+
+
+
+    </FrameLayout>
+
 
 </RelativeLayout>
