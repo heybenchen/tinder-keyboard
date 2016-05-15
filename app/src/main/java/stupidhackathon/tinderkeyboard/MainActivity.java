@@ -9,14 +9,19 @@ import android.widget.Toast;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
 
 import butterknife.BindView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<String> al;
-    private ArrayAdapter<String> arrayAdapter;
-    private int i;
+    private ArrayList<Character> al;
+    private ArrayAdapter<Character> arrayAdapter;
+
+    private Character[] alphabet = new Character[] {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+            'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '};
 
     @BindView(R.id.frame) SwipeFlingAdapterView flingContainer;
 
@@ -28,14 +33,12 @@ public class MainActivity extends AppCompatActivity {
         //add the view via xml or programmatically
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
 
-        al = new ArrayList<>();
-        al.add("php");
-        al.add("c");
-        al.add("python");
-        al.add("java");
+        // shuffle letters
+        al = new ArrayList<>(Arrays.asList(alphabet));
+        Collections.shuffle(al, new Random(System.nanoTime()));
 
         //choose your favorite adapter
-        arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al );
+        arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al);
 
         //set the listener and the adapter
         flingContainer.setAdapter(arrayAdapter);
@@ -64,10 +67,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
                 // Ask for more data here
-                al.add("XML ".concat(String.valueOf(i)));
-                arrayAdapter.notifyDataSetChanged();
-                Log.d("LIST", "notified");
-                i++;
             }
 
             @Override
