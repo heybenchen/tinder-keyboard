@@ -34,17 +34,16 @@ public class LetterSearch {
     return listOfLists;
   }
 
-  public static ArrayList<Character> search(List<ArrayList<String>> dict, String currentWord) {
+  public static ArrayList<Character> search(List<ArrayList<String>> listOfLists, String currentWord) {
     // 65 ->0  - 90->25
+    ArrayList<Character> result = new ArrayList<Character>();
+    ArrayList<String> dict = new ArrayList<String>();
     int firstCharIndex = (int)currentWord.charAt(0);
+    int length = currentWord.length(); 
     firstCharIndex = firstCharIndex - 65;
 
     // brute force on this ArrayList
-    return bfSearch(dict.get(firstCharIndex), currentWord);
-  }
-  public static ArrayList<Character> bfSearch(ArrayList<String> dict, String currentWord) {
-    ArrayList<Character> result = new ArrayList<Character>();
-    int length = currentWord.length(); 
+    dict = listOfLists.get(firstCharIndex);
 
     for(int i=0;i<dict.size();i++) {
       
