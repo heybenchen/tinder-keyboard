@@ -3,22 +3,13 @@ package stupidhackathon.tinderkeyboard;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
-
-import butterknife.BindView;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
@@ -66,9 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void fillAdapter(TinderAdapter adapter) {
         String[] alphabet = new String[] {"a", "b", "c", "d", "e", "f", "g"};
-        for (String letter : alphabet) {
-            Card card = new Card(MainActivity.this, letter);
-            adapter.addCard(card);
+        for (int i = 0; i < 20; i++) { // Need more letters
+            for (String letter : alphabet) {
+                Card card = new Card(MainActivity.this, letter);
+                adapter.addCard(card);
+            }
         }
     }
 
