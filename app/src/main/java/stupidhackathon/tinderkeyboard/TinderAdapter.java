@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -37,6 +38,14 @@ public class TinderAdapter extends ArrayAdapter<Card> {
     public void removeFirstCard() {
         mCards.remove(0);
         notifyDataSetChanged();
+    }
+
+    public List<String> getAllLetters() {
+        List<String> letters = new ArrayList<>(mCards.size());
+        for (Card card : mCards) {
+            letters.add(card.getLetter().toUpperCase());
+        }
+        return letters;
     }
 
     @Override

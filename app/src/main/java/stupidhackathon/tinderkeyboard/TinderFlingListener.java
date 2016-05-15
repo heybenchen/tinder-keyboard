@@ -1,6 +1,7 @@
 package stupidhackathon.tinderkeyboard;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
@@ -35,7 +36,7 @@ public class TinderFlingListener implements SwipeFlingAdapterView.onFlingListene
     public void onLeftCardExit(Object dataObject) {
         // Skip
         Card card = (Card) dataObject;
-        mPreviousGuesses.add(card.getLetter());
+        mPreviousGuesses.add(card.getLetter().toUpperCase());
     }
 
     @Override
@@ -50,9 +51,17 @@ public class TinderFlingListener implements SwipeFlingAdapterView.onFlingListene
     public void onAdapterAboutToEmpty(int itemsInAdapter) {
         // Ask for more data here
         if (itemsInAdapter <= 2) {
-            List<String> results = LetterSearch.getsInstance().search(mTextInput.getText().toString(), mPreviousGuesses);
+            String token = getLastToken();
+            mPreviousGuesses.addAll(mAdapter.getAllLetters());
+            Log.d("REMOVE", "token: " + token);
+            Log.d("REMOVE", "previous: " + mPreviousGuesses.toString());
+            List<String> results = LetterSearch.getsInstance().search(token, mPreviousGuesses);
+            Log.d("REMOVE", "results: " + results);
             while(results.size() < NUM_SUGGESTIONS) {
                 results.add(getRandomLetter());
+            }
+            if (results.size() > NUM_SUGGESTIONS) {
+                results = results.subList(0, NUM_SUGGESTIONS);
             }
             mAdapter.addCards(getCardsFromLetters(results));
         }
@@ -61,6 +70,18 @@ public class TinderFlingListener implements SwipeFlingAdapterView.onFlingListene
     @Override
     public void onScroll(final float v) {
 
+    }
+
+    private String getLastToken() {
+        String input = mTextInput.getText().toString();
+        if (input.isEmpty()) {
+            return "";
+        }
+        if (input.charAt(input.length() - 1) == ' ') {
+            return "";
+        }
+        String[] tokens = input.split("\\s");
+        return tokens[tokens.length - 1];
     }
 
     private List<Card> getCardsFromLetters(List<String> letters) {
