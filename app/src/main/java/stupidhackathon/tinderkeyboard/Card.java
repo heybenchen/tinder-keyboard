@@ -27,7 +27,7 @@ public class Card {
 
         mContext = context;
         mLetter = letter.toLowerCase();
-        mFontSize = 40 + random.nextInt(40);
+        mFontSize = 60 + random.nextInt(70);
 
         try {
             mFontNames = context.getAssets().list("fonts");
