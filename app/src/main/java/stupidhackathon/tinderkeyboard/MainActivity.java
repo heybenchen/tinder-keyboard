@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -41,7 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Set keyboard show/hide
         mEditText.setOnClickListener(mEditClickListener);
-        hideKeyboard(true);
+
+        mFlingContainer.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                hideKeyboard(true);
+                mFlingContainer.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
     }
 
     @Override

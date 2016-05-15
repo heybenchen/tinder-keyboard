@@ -40,7 +40,7 @@ public class TinderFlingListener implements SwipeFlingAdapterView.onFlingListene
     public void onAdapterAboutToEmpty(int itemsInAdapter) {
         // Ask for more data here
         if (itemsInAdapter <= 1) {
-            Toast.makeText(mContext, "About to empty!", Toast.LENGTH_SHORT).show();
+            // Get elements
         }
     }
 
