@@ -19,13 +19,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Character> al;
-    private ArrayAdapter<Character> arrayAdapter;
-
-    private Character[] alphabet = new Character[] {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
-            'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '};
-
-    @BindView(R.id.frame) SwipeFlingAdapterView flingContainer;
+    private TinderAdapter mAdapter;
+    private SwipeFlingAdapterView mFlingContainer;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -38,56 +33,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //add the view via xml or programmatically
-        SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
-
-        // shuffle letters
-        al = new ArrayList<>(Arrays.asList(alphabet));
-        Collections.shuffle(al, new Random(System.nanoTime()));
-
-        //choose your favorite adapter
-        arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al);
+        mFlingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
 
         //set the listener and the adapter
-        flingContainer.setAdapter(arrayAdapter);
-        flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
-            @Override
-            public void removeFirstObjectInAdapter() {
-                // this is the simplest way to delete an object from the Adapter (/AdapterView)
-                Log.d("LIST", "removed object!");
-                al.remove(0);
-                arrayAdapter.notifyDataSetChanged();
-            }
+        mAdapter = new TinderAdapter(MainActivity.this);
+        fillAdapter(mAdapter);
+        mFlingContainer.setAdapter(mAdapter);
+        mFlingContainer.setFlingListener(new TinderFlingListener(MainActivity.this, mAdapter));
+    }
 
-            @Override
-            public void onLeftCardExit(Object dataObject) {
-                //Do something on the left!
-                //You also have access to the original object.
-                //If you want to use it just cast it (String) dataObject
-                Toast.makeText(MainActivity.this, "Left!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onRightCardExit(Object dataObject) {
-                Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAdapterAboutToEmpty(int itemsInAdapter) {
-                // Ask for more data here
-            }
-
-            @Override
-            public void onScroll(final float v) {
-
-            }
-        });
-
-        // Optionally add an OnItemClickListener
-        flingContainer.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClicked(int itemPosition, Object dataObject) {
-                Toast.makeText(MainActivity.this, "Clicked!", Toast.LENGTH_SHORT).show();
-            }
-        });
+    private void fillAdapter(TinderAdapter adapter) {
+        String[] alphabet = new String[] {"a", "b", "c", "d", "e", "f", "g"};
+        for (String letter : alphabet) {
+            Card card = new Card(MainActivity.this, letter);
+            adapter.addCard(card);
+        }
     }
 }
