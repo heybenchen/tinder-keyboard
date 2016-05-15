@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:background="#ffffff"
+            android:paddingBottom="30dp"
             app:rotation_degrees="15.5"
             tools:context=".MainActivity"/>
 
