@@ -21,4 +21,8 @@ public class Card {
         textView.setText(mLetter);
         return textView;
     }
+
+    public String getLetter() {
+        return mLetter;
+    }
 }

@@ -2,6 +2,7 @@ package stupidhackathon.tinderkeyboard;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
@@ -10,30 +11,29 @@ public class TinderFlingListener implements SwipeFlingAdapterView.onFlingListene
 
     private Context mContext;
     private TinderAdapter mAdapter;
+    private EditText mTextInput;
 
-    public TinderFlingListener(Context context, TinderAdapter tinderAdapter) {
+    public TinderFlingListener(Context context, EditText textInput, TinderAdapter tinderAdapter) {
         mContext = context;
+        mTextInput = textInput;
         mAdapter = tinderAdapter;
     }
 
     @Override
     public void removeFirstObjectInAdapter() {
-        // this is the simplest way to delete an object from the Adapter (/AdapterView)
-        Log.d("LIST", "removed object!");
         mAdapter.removeFirstCard();
     }
 
     @Override
     public void onLeftCardExit(Object dataObject) {
-        //Do something on the left!
-        //You also have access to the original object.
-        //If you want to use it just cast it (String) dataObject
-        Toast.makeText(mContext, "Left!", Toast.LENGTH_SHORT).show();
+        // Skip
     }
 
     @Override
     public void onRightCardExit(Object dataObject) {
-        Toast.makeText(mContext, "Right!", Toast.LENGTH_SHORT).show();
+        // Type it!
+        Card card = (Card) dataObject;
+        mTextInput.setText(mTextInput.getText() + card.getLetter());
     }
 
     @Override
