@@ -37,6 +37,11 @@ public class TinderFlingListener implements SwipeFlingAdapterView.onFlingListene
         // Skip
         Card card = (Card) dataObject;
         mPreviousGuesses.add(card.getLetter().toUpperCase());
+
+        // If we guessed all of the letters, reset
+        if (mPreviousGuesses.size() > ALPHABET.length) {
+            mPreviousGuesses.clear();
+        }
     }
 
     @Override
