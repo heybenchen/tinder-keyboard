@@ -11,6 +11,11 @@ import android.widget.EditText;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Setup adapter for keyboard
         mAdapter = new TinderAdapter(MainActivity.this);
-        fillAdapter(mAdapter);
         mFlinger.setAdapter(mAdapter);
         mFlinger.setFlingListener(new TinderFlingListener(MainActivity.this, mEditText, mAdapter));
 
@@ -63,16 +67,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         hideKeyboard(false);
-    }
-
-    private void fillAdapter(TinderAdapter adapter) {
-        String[] alphabet = new String[] {"a", "b", "c", "d", "e", "f", "g"};
-        for (int i = 0; i < 20; i++) { // Need more letters
-            for (String letter : alphabet) {
-                Card card = new Card(MainActivity.this, letter);
-                adapter.addCard(card);
-            }
-        }
     }
 
     private void showKeyboard(boolean immediate) {

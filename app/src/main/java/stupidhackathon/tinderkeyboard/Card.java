@@ -26,7 +26,7 @@ public class Card {
         final Random random = new Random();
 
         mContext = context;
-        mLetter = letter;
+        mLetter = letter.toLowerCase();
         mFontSize = 40 + random.nextInt(40);
 
         try {
