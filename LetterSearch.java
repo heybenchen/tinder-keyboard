@@ -34,13 +34,13 @@ public class LetterSearch {
     return listOfLists;
   }
 
-  public static ArrayList<Character> search(List<ArrayList<String>> listOfLists, String currentWord) {
-    // 65 ->0  - 90->25
+  public static ArrayList<Character> search(List<ArrayList<String>> listOfLists, String currentWord, ArrayList<Character> previousGuess) {
     ArrayList<Character> result = new ArrayList<Character>();
     ArrayList<String> dict = new ArrayList<String>();
     int firstCharIndex = (int)currentWord.charAt(0);
     int length = currentWord.length(); 
-    firstCharIndex = firstCharIndex - 65;
+    firstCharIndex = firstCharIndex - 65; // 65 ->0  - 90->25
+    char currentGuess;
 
     // brute force on this ArrayList
     dict = listOfLists.get(firstCharIndex);
@@ -52,10 +52,11 @@ public class LetterSearch {
         
         // check if letter at currentWord.length-1 is in the alreadyTriedList
         // otherwise we gucci
+        currentGuess = dict.get(i).charAt(length);
 
         // check if chars up to length are the same
-        if(currentWord.equals(dict.get(i).substring(0, length)) && !result.contains(dict.get(i).charAt(length))) {
-          result.add(dict.get(i).charAt(length));
+        if(currentWord.equals(dict.get(i).substring(0, length)) && !previousGuess.contains(currentGuess) && !result.contains(currentGuess)) {
+          result.add(currentGuess);
         }
       }
     }
@@ -64,7 +65,8 @@ public class LetterSearch {
   }
   public static void main(String[] args) throws IOException {
     String inputString = "HEADPIN";
+    ArrayList<Character> previousGuess = new ArrayList<Character>();
     List<ArrayList<String>> dict = generate();
-    System.out.println(search(dict, inputString.toUpperCase()));
+    System.out.println(search(dict, inputString.toUpperCase(), previousGuess));
   }
 }
