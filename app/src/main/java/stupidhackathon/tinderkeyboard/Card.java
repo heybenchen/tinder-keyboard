@@ -41,4 +41,8 @@ public class Card {
         textView.setTypeface(mTypeface);
         return textView;
     }
+
+    public String getLetter() {
+        return mLetter;
+    }
 }
