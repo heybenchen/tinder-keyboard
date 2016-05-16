@@ -62,6 +62,8 @@ public class TinderAdapter extends ArrayAdapter<Card> {
         TextView fontName = ButterKnife.findById(convertView, R.id.font_name);
         fontName.setText(card.getCardName());
 
+        convertView.setBackground(card.loadDrawable());
+
         return convertView;
     }
 }
