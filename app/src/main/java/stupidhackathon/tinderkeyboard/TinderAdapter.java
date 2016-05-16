@@ -1,6 +1,16 @@
 package stupidhackathon.tinderkeyboard;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +81,9 @@ public class TinderAdapter extends ArrayAdapter<Card> {
         TextView fontName = ButterKnife.findById(convertView, R.id.font_name);
         fontName.setText(card.getCardName());
 
-        convertView.setBackground(card.loadDrawable());
+        ColorDrawable drawable = new ColorDrawable();
+        RoundedImageView bkg = (RoundedImageView) convertView.findViewById(R.id.bkg);
+        bkg.setImageDrawable(card.loadDrawable());
 
         return convertView;
     }
